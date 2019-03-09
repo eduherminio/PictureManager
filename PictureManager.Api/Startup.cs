@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using AspectCore.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json.Converters;
 using PictureManager.Api.Exceptions;
+using PictureManager.Mapper;
 using PictureManager.Api.Swagger;
 
 namespace PictureManager.Api
@@ -53,6 +51,9 @@ namespace PictureManager.Api
             // Swagger
             string assemblyName = GetType().GetTypeInfo().Assembly.GetName().Name;
             services.ConfigureSwaggerMvcServices(_swaggerDocumentVersion, _apiInfo, assemblyName);
+
+            // AutoMapper
+            services.ConfigureAutoMapper();
 
             services.AddAuthenticationCore();
             services.AddAuthorizationPolicyEvaluator();

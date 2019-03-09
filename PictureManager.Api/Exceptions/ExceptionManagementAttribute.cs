@@ -52,6 +52,12 @@ namespace PictureManager.Api.Exceptions
                 LogError("Invalid operation", context, e.Message);
                 throw e;
             }
+            if (e is AutoMapper.AutoMapperMappingException mappingException)
+            {
+                // AutoMapper encapsulates all exceptions thrown inside its mappings
+                LogError("Mapping exception", context, e.Message);
+                HandleException(mappingException.InnerException, context);
+            }
 
             GenericException(e, context);
         }
