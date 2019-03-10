@@ -17,7 +17,6 @@ namespace PictureManager.Mapper
                 assemblies.AddRange(provider.Assemblies);
             }
 
-            services.AddSingleton(new MapperProvider());
             var serviceDescriptor = services.FirstOrDefault(descriptor => descriptor.ServiceType == typeof(IMapperProvider));
             services.Remove(serviceDescriptor);
         }

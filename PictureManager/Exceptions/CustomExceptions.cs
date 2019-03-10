@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace PictureManager.Api.Exceptions
+namespace PictureManager.Exceptions
 {
     [Serializable]
 #pragma warning disable S4027 // Exceptions should provide standard constructors - Abstract, base exception, public constructors aren't needed

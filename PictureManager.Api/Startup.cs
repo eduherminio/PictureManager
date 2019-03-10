@@ -8,9 +8,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PictureManager.Api.Exceptions;
+using PictureManager.Exceptions;
 using PictureManager.Mapper;
 using PictureManager.Api.Swagger;
+using PictureManager.Api.Exceptions;
 
 namespace PictureManager.Api
 {
@@ -53,6 +54,7 @@ namespace PictureManager.Api
             services.ConfigureSwaggerMvcServices(_swaggerDocumentVersion, _apiInfo, assemblyName);
 
             // AutoMapper
+            services.AddSingleton(new MapperProvider());
             services.ConfigureAutoMapper();
 
             services.AddAuthenticationCore();
@@ -63,7 +65,7 @@ namespace PictureManager.Api
                 options => options.Filters.Add(typeof(ExceptionFilterAttribute)))
                 .AddJsonOptions(options => options.SerializerSettings.AddCustomJsonSerializerSettings());
 
-            services.AddPictureManagerServices();
+            services.AddPictureManagerServices(Configuration);
 
             return services.BuildAspectInjectorProvider();
         }

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 using PictureManager.Api.Logs;
+using PictureManager.Exceptions;
 
 namespace PictureManager.Api.Exceptions
 {

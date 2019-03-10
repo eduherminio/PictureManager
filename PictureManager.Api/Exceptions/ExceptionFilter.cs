@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
+using PictureManager.Exceptions;
 
 namespace PictureManager.Api.Exceptions
 {

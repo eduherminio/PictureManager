@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace PictureManager.Api.Exceptions
+namespace PictureManager.Exceptions
 {
     public class HttpExceptionResponseInfo
     {

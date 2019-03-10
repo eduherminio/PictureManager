@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace PictureManager.Api.Constants
+﻿namespace PictureManager.Api.Constants
 {
     public static class AppSettingsKeys
     {

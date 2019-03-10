@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -11,11 +12,8 @@ namespace PictureManager.Api.Test.Utils
         public static TBodyResponse Get<TBodyResponse>(HttpClient client, string entityUri, out HttpStatusCode statusCode) where TBodyResponse : class
         {
             HttpResponseMessage response = client.GetAsync(entityUri).Result;
-            string responseString = response.Content.ReadAsStringAsync().Result;
 
-            statusCode = response.StatusCode;
-
-            return Deserialize<TBodyResponse>(responseString);
+            return GetDataFromHttpResponse<TBodyResponse>(response, out statusCode);
         }
 
         public static TBodyResponse Post<TBodyRequest, TBodyResponse>(
@@ -83,11 +81,19 @@ namespace PictureManager.Api.Test.Utils
         private static TBodyResponse GetDataFromHttpResponse<TBodyResponse>(HttpResponseMessage response, out HttpStatusCode statusCode)
             where TBodyResponse : class
         {
+            TBodyResponse returnObject = null;
+
             string responseString = response.Content.ReadAsStringAsync().Result;
 
             statusCode = response.StatusCode;
 
-            return Deserialize<TBodyResponse>(responseString);
+            try
+            {
+                returnObject = Deserialize<TBodyResponse>(responseString);
+            }
+            catch (Exception) { }
+
+            return returnObject;
         }
 
         private static ByteArrayContent Serialize<T>(T entity)
