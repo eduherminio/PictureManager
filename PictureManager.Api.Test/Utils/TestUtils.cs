@@ -48,16 +48,5 @@ namespace PictureManager.Api.Test.Utils
         }
 
         public static HttpClient GetHttpClient(TestServer server) => server.CreateClient();
-
-        //public static HttpClient GetAuthHttpClient(TestServer server, TestServer authServer, string username)
-        //{
-        //    HttpClient client = server.CreateClient();
-        //    if (authServer != null)
-        //    {
-        //        string authToken = GetAuthToken(authServer, username);
-        //        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(JwtConstants.Bearer, authToken);
-        //    }
-        //    return client;
-        //}
     }
 }

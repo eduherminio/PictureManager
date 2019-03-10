@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 using System;
 
-namespace PictureManager.Api.Logs
+namespace PictureManager.Logs
 {
     /// <summary>
     /// This class is an Interceptor to log all method invocations
@@ -39,16 +39,16 @@ namespace PictureManager.Api.Logs
                 ? LogHelpers.ValueToLog(context.Parameters)
                 : "No params";
 
-            Logger.Log(_logLevel
-                , "Invocation to: {0} : {1} with params: {2}"
-                , context.Implementation.GetType()
-                , context.ImplementationMethod.Name, parametersInStringFormat);
+            Logger.Log(_logLevel,
+                "Invocation to: {0} : {1} with params: {2}",
+                context.Implementation.GetType(),
+                context.ImplementationMethod.Name, parametersInStringFormat);
 
             await next(context).ConfigureAwait(false);
 
-            Logger.Log(_logLevel
-                , "Return value: {0}"
-                , context.ReturnValue != null
+            Logger.Log(_logLevel,
+                "Return value: {0}",
+                context.ReturnValue != null
                     ? LogHelpers.ValueToLog(context.ReturnValue)
                     : "void");
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
@@ -13,7 +14,10 @@ namespace PictureManager.Api.Test.Utils
 
         public Fixture()
         {
-            Server = TestUtils.CreateTestServer<Startup>();
+            IConfiguration configuration = AppSettingsHelpers.GetConfiguration();
+            configuration["PhotoUrl"] = "http://jsonplaceholder.typicode.com/photos";
+            configuration["AlbumUrl"] = "http://jsonplaceholder.typicode.com/albums";
+            Server = TestUtils.CreateTestServer<Startup>(configuration);
         }
 
         public HttpClient GetClient() => TestUtils.GetHttpClient(Server);

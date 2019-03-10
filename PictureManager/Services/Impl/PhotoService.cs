@@ -24,7 +24,7 @@ namespace PictureManager.Services.Impl
             ICollection<Photo> photoList =
                 HttpHelper.Get<ICollection<Photo>>(_httpClient, _pictureManagerConfiguration.PhotoUrl, out HttpStatusCode httpStatusCode);
 
-            if (httpStatusCode != HttpStatusCode.OK || photoList?.Any() == false)
+            if (httpStatusCode != HttpStatusCode.OK || photoList == null)
             {
                 throw new InternalErrorException(
                     $"Error invoking {_pictureManagerConfiguration?.PhotoUrl}");

@@ -2,8 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Swagger;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Collections.Generic;
 using System.IO;
 
 namespace PictureManager.Api.Swagger
@@ -28,8 +26,6 @@ namespace PictureManager.Api.Swagger
                         License = new License { Name = "GNU GENERAL PUBLIC LICENSE Version 3", Url = "https://github.com/eduherminio/PictureManager/blob/master/LICENSE" }
                     }
                 );
-
-                //c.AddJwtAuthentication();
 
                 // Allow same class names in different namespaces
                 c.CustomSchemaIds(x => x.FullName);

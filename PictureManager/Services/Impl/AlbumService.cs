@@ -26,7 +26,7 @@ namespace PictureManager.Services.Impl
             ICollection<Album> albumList =
                 HttpHelper.Get<ICollection<Album>>(_httpClient, _pictureManagerConfiguration.AlbumUrl, out HttpStatusCode httpStatusCode);
 
-            if (httpStatusCode != HttpStatusCode.OK || albumList?.Any() == false)
+            if (httpStatusCode != HttpStatusCode.OK || albumList == null)
             {
                 throw new InternalErrorException(
                     $"Error invoking {_pictureManagerConfiguration?.AlbumUrl}");

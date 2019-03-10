@@ -35,8 +35,6 @@ namespace PictureManager.Api
             services.AddApplicationInsightsTelemetry(Configuration);
             services.AddOptions();
 
-            //services.AddJwtServices();
-
             // Api versioning
             services.AddApiVersioning(options =>
             {

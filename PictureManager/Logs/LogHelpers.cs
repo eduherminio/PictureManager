@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PictureManager.Api.Logs
+namespace PictureManager.Logs
 {
     public static class LogHelpers
     {

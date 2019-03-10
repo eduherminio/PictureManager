@@ -3,7 +3,7 @@ using AspectCore.Injector;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
-using PictureManager.Api.Logs;
+using PictureManager.Logs;
 using PictureManager.Exceptions;
 
 namespace PictureManager.Api.Exceptions
@@ -12,7 +12,9 @@ namespace PictureManager.Api.Exceptions
     public class ExceptionManagementAttribute : AbstractInterceptorAttribute
     {
         [FromContainer]
+#pragma warning disable RCS1170 // Use read-only auto-implemented property. - Public set needed for DI
         protected ILogger<ExceptionManagementAttribute> Logger { get; set; }
+#pragma warning restore RCS1170 // Use read-only auto-implemented property.
 
         public async override Task Invoke(AspectContext context, AspectDelegate next)
         {

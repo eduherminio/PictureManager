@@ -11,7 +11,10 @@ namespace PictureManager.Test
     {
         protected IServiceProvider ServiceProvider { get; set; }
 
-        protected BaseTest() { }
+        protected BaseTest()
+        {
+            ServiceProvider = GetBaseServiceCollection().BuildServiceProvider();
+        }
 
         protected IServiceCollection GetBaseServiceCollection()
         {
@@ -44,7 +47,7 @@ namespace PictureManager.Test
 
         protected T GetService<T>()
         {
-            return ServiceProvider.GetService<T>();
+            return ServiceProvider.GetRequiredService<T>();
         }
 
         protected virtual void NewContext()

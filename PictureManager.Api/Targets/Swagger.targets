@@ -17,7 +17,7 @@
         Condition= "$(ExeGenSwag) == 'True' and $(PublishDir) != ''">
     <Message Text="### Executing NSwag Api Clients Generation ###" Importance="High" />
     <Error Condition="Exists($(AssemblyName))" Text="The assembly file could not be found, please publish the version before generating client" />
-    <Exec Command="$(NSwagExe_Core20) swagger2csclient /input:$(SwaggerBuildDir)\$(AssemblyName).swagger.json /namespace:PictureManager.Api.Client.SwaggerClient /InjectHttpClient:true /className:BasketManagerClient /ClientBaseClass:SwaggerBaseClient /UseHttpRequestMessageCreationMethod:true /output:$(SwaggerBuildDir)\\BasketManagerClient.cs"/>
+    <Exec Command="$(NSwagExe_Core20) swagger2csclient /input:$(SwaggerBuildDir)\$(AssemblyName).swagger.json /namespace:PictureManager.Api.Client.SwaggerClient /InjectHttpClient:true /className:PictureManagerClient /ClientBaseClass:SwaggerBaseClient /UseHttpRequestMessageCreationMethod:true /output:$(SwaggerBuildDir)\\BasketManagerClient.cs"/>
   </Target>
 
   <ItemGroup>

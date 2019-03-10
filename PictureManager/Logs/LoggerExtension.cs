@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace PictureManager.Api.Logs
+namespace PictureManager.Logs
 {
     public static class LoggerExtension
     {
