@@ -3,8 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using AutoMapper;
-using PictureManager.Mapper;
+using Microsoft.Extensions.Configuration;
 
 namespace PictureManager.Test
 {
@@ -12,23 +11,24 @@ namespace PictureManager.Test
     {
         protected IServiceProvider ServiceProvider { get; set; }
 
-        private readonly MapperProvider _mapperProvider;
-
-        protected BaseTest()
-        {
-            _mapperProvider = new MapperProvider();
-        }
+        protected BaseTest() { }
 
         protected IServiceCollection GetBaseServiceCollection()
         {
             IServiceCollection services = new ServiceCollection();
 
-            //services.AddJwtServices();
-            if (_mapperProvider != null)
-            {
-                IMapper Mapper = new AutoMapper.Mapper(CreateMapperConfiguration());
-                services.AddSingleton(Mapper);
-            }
+            ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+
+            IReadOnlyDictionary<string, string> defaultConfigurationStrings =
+                new Dictionary<string, string>()
+                {
+                    ["PhotoUrl"] = "http://jsonplaceholder.typicode.com/photos",
+                    ["AlbumUrl"] = "http://jsonplaceholder.typicode.com/albums"
+                };
+
+            configurationBuilder.AddInMemoryCollection(defaultConfigurationStrings);
+
+            services.AddPictureManagerServices(configurationBuilder.Build());
 
             return services;
         }
@@ -50,20 +50,6 @@ namespace PictureManager.Test
         protected virtual void NewContext()
         {
             NewScope();
-        }
-
-        protected MapperConfiguration CreateMapperConfiguration()
-        {
-            return new MapperConfiguration(cfg =>
-            {
-                // DI inside AutoMapper
-                cfg.ConstructServicesUsing(Resolve);
-
-                cfg.DisableConstructorMapping();
-
-                // Add all profiles in assembly
-                cfg.AddProfiles(_mapperProvider.Assemblies);
-            });
         }
 
         protected object Resolve(Type type)

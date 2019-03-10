@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using AspectCore.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
@@ -8,8 +6,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PictureManager.Exceptions;
-using PictureManager.Mapper;
 using PictureManager.Api.Swagger;
 using PictureManager.Api.Exceptions;
 
@@ -52,10 +48,6 @@ namespace PictureManager.Api
             // Swagger
             string assemblyName = GetType().GetTypeInfo().Assembly.GetName().Name;
             services.ConfigureSwaggerMvcServices(_swaggerDocumentVersion, _apiInfo, assemblyName);
-
-            // AutoMapper
-            services.AddSingleton(new MapperProvider());
-            services.ConfigureAutoMapper();
 
             services.AddAuthenticationCore();
             services.AddAuthorizationPolicyEvaluator();
